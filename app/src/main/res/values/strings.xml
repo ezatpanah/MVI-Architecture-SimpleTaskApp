@@ -1,7 +1,6 @@
 <resources>
-    <string name="app_name">SimpleNoteApp-MVI</string>
+    <string name="app_name">SimpleTaskApp-MVI</string>
 
-    <string name="noteAppName">My Note</string>
     <string name="filter">Filter</string>
     <string name="title">Title</string>
     <string name="desc">Description</string>
@@ -11,5 +10,13 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="search">Search...</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="deleteall">DeleteAll</string>
+
+    <string name="delete_msg_body">Are you sure to delete All your Data ?</string>
+    <string name="delete_title">Delete All Data</string>
+    <string name="delete_yes">Yes!</string>
+    <string name="delete_cancle">Cancel</string>
 
 </resources>
