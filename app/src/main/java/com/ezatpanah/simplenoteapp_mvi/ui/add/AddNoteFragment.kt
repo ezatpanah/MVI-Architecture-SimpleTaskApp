@@ -38,7 +38,6 @@ class AddNoteFragment : BottomSheetDialogFragment() {
     private val viewModel: AddNoteViewModel by viewModels()
 
     private var type = ""
-    private var noteId = 0
     private var cat = ""
     private var pr = ""
     private val categoriesList: MutableList<String> = mutableListOf()
@@ -52,7 +51,7 @@ class AddNoteFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        noteId = arguments?.getInt(BUNDLE_ID) ?: 0
+        val noteId = arguments?.getInt(BUNDLE_ID) ?: 0
 
         type = if (noteId > 0) EDIT else NEW
 
@@ -73,9 +72,12 @@ class AddNoteFragment : BottomSheetDialogFragment() {
                     when (state) {
                         is AddNoteState.Idle -> {}
                         is AddNoteState.SpinnerData -> {
+                            categoriesList.addAll(state.catList)
                             categoriesSpinner.setupList(state.catList) {
                                 cat = it
                             }
+
+                            prioriesList.addAll(state.prList)
                             prioritySpinner.setupList(state.prList) {
                                 pr = it
                             }
@@ -104,7 +106,7 @@ class AddNoteFragment : BottomSheetDialogFragment() {
 
                 val title = titleEdt.text.toString()
                 val desc = descEdt.text.toString()
-                entity.id = 0
+                entity.id = noteId
                 entity.title = title
                 entity.desc = desc
                 entity.cat = cat
