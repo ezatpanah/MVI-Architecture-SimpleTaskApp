@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SimpleNoteApp-MVI</string>
+
+    <string name="noteAppName">My Note</string>
+    <string name="filter">Filter</string>
+    <string name="title">Title</string>
+    <string name="desc">Description</string>
+    <string name="categories">Categories</string>
+    <string name="priority">Priority</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="search">Search...</string>
+
+</resources>
