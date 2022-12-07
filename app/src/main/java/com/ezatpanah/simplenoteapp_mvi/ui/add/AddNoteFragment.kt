@@ -89,8 +89,8 @@ class AddNoteFragment : BottomSheetDialogFragment() {
                         is AddNoteState.NoteDetail -> {
                             titleEdt.setText(state.entity.title)
                             descEdt.setText(state.entity.desc)
-                            categoriesSpinner.setSelection(categoriesList.getIndexFromList(it.cat))
-                            prioritySpinner.setSelection(prioriesList.getIndexFromList(it.pr))
+                            categoriesSpinner.setSelection(categoriesList.getIndexFromList(state.entity.cat))
+                            prioritySpinner.setSelection(prioriesList.getIndexFromList(state.entity.pr))
                         }
                         is AddNoteState.UpdateNote -> {
                             dismiss()
