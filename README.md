@@ -4,6 +4,8 @@ Overview :
 <br>
 The purpose of this project series is to teach different architectures with different structures, and you can check these architectures and structures in same App
 
+** coming soon on AndroidGeek youtube channel
+
 This project in
 - MVP architecture : https://github.com/ezatpanah/SimpleTaskApp-MVP [ ]
 - MVVM architecture : https://github.com/ezatpanah/SimpleTaskApp-MVVM [ Room Database - LiveData - Flow - Coroutines - Dagger Hilt - ViewModel - Lottie - View Binding ]
