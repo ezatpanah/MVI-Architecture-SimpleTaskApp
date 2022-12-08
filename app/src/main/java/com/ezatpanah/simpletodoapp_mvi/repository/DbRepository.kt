@@ -12,6 +12,8 @@ class DbRepository  @Inject constructor(private val dao : TaskDao){
     suspend fun deleteTask(entity: TaskEntity) = dao.deleteTask(entity)
 
     fun getAllTasks() = dao.getAllTasks()
+    fun deleteAllTasks() = dao.deleteAllTask()
+
     fun getDetailsTask(id:Int)= dao.getTask(id)
     fun filterTask(priority: String) = dao.filterTask(priority)
     fun searchTask(title: String) = dao.searchTask(title)

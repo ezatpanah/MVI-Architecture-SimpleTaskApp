@@ -24,6 +24,7 @@ import com.ezatpanah.simpletodoapp_mvi.utils.Constants.NORMAL
 import com.ezatpanah.simpletodoapp_mvi.viewmodel.main.MainIntent
 import com.ezatpanah.simpletodoapp_mvi.viewmodel.main.MainState
 import com.ezatpanah.simpletodoapp_mvi.viewmodel.main.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
             btnAddTask.setOnClickListener { AddTaskFragment().show(supportFragmentManager, AddTaskFragment().tag) }
 
-            viewModel.handleIntent(MainIntent.LoadAllNotes)
+            viewModel.handleIntent(MainIntent.LoadAllTasks)
 
             lifecycleScope.launch {
                 viewModel.state.collect { state ->
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                             emptyBody.visibility = View.VISIBLE
                             listBody.visibility = View.GONE
                         }
-                        is MainState.LoadNotes -> {
+                        is MainState.LoadTasks -> {
                             emptyBody.visibility = View.GONE
                             listBody.visibility = View.VISIBLE
 
@@ -83,13 +84,13 @@ class MainActivity : AppCompatActivity() {
                                         taskEntity.desc = entity.desc
                                         taskEntity.cat = entity.cat
                                         taskEntity.pr = entity.pr
-                                        viewModel.handleIntent(MainIntent.DeleteNote(taskEntity))
+                                        viewModel.handleIntent(MainIntent.DeleteTask(taskEntity))
                                     }
                                 }
                             }
                         }
-                        is MainState.DeleteNote -> {
-                            //For example show toast, snack bar and more ...
+                        is MainState.DeleteTask -> {
+                            Snackbar.make(binding.root, "Task deleted!", Snackbar.LENGTH_SHORT).show()
                         }
                         is MainState.GoToDetail -> {
                             val noteFragment = AddTaskFragment()
@@ -135,7 +136,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                viewModel.handleIntent(MainIntent.SearchNote(newText))
+                viewModel.handleIntent(MainIntent.SearchTask(newText))
                 return true
             }
         })
@@ -149,10 +150,10 @@ class MainActivity : AppCompatActivity() {
         builder.setSingleChoiceItems(priority, selectedItem) { dialog, item ->
             when (item) {
                 0 -> {
-                    viewModel.handleIntent(MainIntent.LoadAllNotes)
+                    viewModel.handleIntent(MainIntent.LoadAllTasks)
                 }
                 in 1..3 -> {
-                    viewModel.handleIntent(MainIntent.FilterNote(priority[item]))
+                    viewModel.handleIntent(MainIntent.FilterTask(priority[item]))
                 }
             }
             selectedItem = item

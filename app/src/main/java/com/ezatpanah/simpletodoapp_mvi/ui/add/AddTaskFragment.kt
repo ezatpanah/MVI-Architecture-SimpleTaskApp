@@ -58,10 +58,10 @@ class AddTaskFragment : BottomSheetDialogFragment() {
             }
 
             lifecycleScope.launchWhenCreated {
-                viewModel.addNoteIntent.send(AddTaskIntent.SpinnerList)
+                viewModel.addTaskIntent.send(AddTaskIntent.SpinnerList)
 
                 if (type == EDIT) {
-                    viewModel.addNoteIntent.send(AddTaskIntent.NoteDetail(noteId))
+                    viewModel.addTaskIntent.send(AddTaskIntent.TaskDetail(noteId))
                 }
 
                 viewModel.state.collect { state ->
@@ -78,19 +78,19 @@ class AddTaskFragment : BottomSheetDialogFragment() {
                                 pr = it
                             }
                         }
-                        is AddTaskState.SaveNote -> {
+                        is AddTaskState.SaveTask -> {
                             dismiss()
                         }
                         is AddTaskState.ErrorMsg -> {
                             Toast.makeText(requireContext(), state.msg, Toast.LENGTH_SHORT).show()
                         }
-                        is AddTaskState.NoteDetail -> {
+                        is AddTaskState.TaskDetail -> {
                             titleEdt.setText(state.entity.title)
                             descEdt.setText(state.entity.desc)
                             categoriesSpinner.setSelection(categoriesList.getIndexFromList(state.entity.cat))
                             prioritySpinner.setSelection(prioriesList.getIndexFromList(state.entity.pr))
                         }
-                        is AddTaskState.UpdateNote -> {
+                        is AddTaskState.UpdateTask -> {
                             dismiss()
                         }
 
@@ -110,9 +110,9 @@ class AddTaskFragment : BottomSheetDialogFragment() {
 
                 lifecycleScope.launch {
                     if (type == NEW) {
-                        viewModel.addNoteIntent.send(AddTaskIntent.SaveNote(entity))
+                        viewModel.addTaskIntent.send(AddTaskIntent.SaveTask(entity))
                     } else {
-                        viewModel.addNoteIntent.send(AddTaskIntent.UpdateNote(entity))
+                        viewModel.addTaskIntent.send(AddTaskIntent.UpdateTask(entity))
                     }
                 }
             }
